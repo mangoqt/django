@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load static %}
+</head>
+<body>
+    <div class="form-group">
+     <form class="form-horizontal" name="zknode"  role="form" method="post" action="">
+     {% csrf_token %}
+         <label for="app_code" class="control-label">应用名称</label>
+         <input id="app_code" type="text" placeholder="模糊匹配" name="app_code" class="control-label "  style="width:150px; text-align: left">
+        <label for="path" class="control-label">节点路径</label>
+        <input id="path" type="text" placeholder="模糊匹配" name="path" class="control-label "  style="width:150px; text-align: left">
+        <div class="btn-group">
+              <button type="submit" class="btn btn-info" onclick="checkaction(2)"  class="btn" >查询</button>
+              <button type="submit" class="btn btn-info" onclick="checkaction(0)"  class="btn">删除</button>
+             <button type="submit" class="btn btn-info" onclick="checkaction(1)"  class="btn">修改</button>
+             <a  href="../add" class="btn"  id="add">新增</a>
+        </div>
+     </div>
+
+
+
+    <div class="table-nav">
+    <table  class="table table-hover table-bordered" >
+        <tr>
+            <th>序号</th>
+            <th>应用名称</th>
+            <th>节点路径</th>
+            <th>节点内容</th>
+            <th>同步结果</th>
+            <th>同步时间</th>
+        </tr>
+        {% for node in zknode %}
+        <tr>
+            <td><input type="checkbox" class="checkbox" name="node_id" value="{{ node.id }}"  id="nodelist"></td>
+            <td>{{ node.app_code }}</td>
+            <td>{{ node.path }}</td>
+            <td>{{ node.content }}</td>
+            <td>{{ node.is_sync }}</td>
+            <td>{{ node.sync_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}
+
+</body>
+</html>

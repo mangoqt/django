@@ -1,0 +1,14 @@
+.navbar-default{
+    background-color: #28a4c9;
+}
+.navbar-default .navbar-brand {
+    color: #9eef05;
+}
+.navbar-right{
+    float: right!important;
+    margin: 5px;
+}
+a{
+    color: greenyellow;
+    text-decoration: none;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cmdb运维</title>
+    {% load staticfiles %}
+
+    <link type="text/css" href="{% static "css/bootstrap.min.css"%}" rel="stylesheet"/>
+    <link type="text/css" href="{% static "css/login.css"%}" rel="stylesheet"/>
+    <script src="{% static "js/jquery-3.2.1.min.js"%}"></script>
+    <script src="{% static "js/bootstrap.min.js"%}"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+             <div class="login-panel panel panel-default" style="margin-top: 60px">
+                 <div class="panel-heading">
+                     <h3 class="panel-title">登录</h3>
+                 </div>
+                 <div class="panel-body">
+                     <form method="post" action="../account/login.html">
+                           {% csrf_token %}
+                         <fieldset>
+                             <div class="form-group">
+                                 <input class="form-control" placeholder="账号" name="username"  autofocus>
+                             </div>
+                             <div class="form-group">
+                                 <input class="form-control" placeholder="密码" name="password" type="password" value="">
+                             </div>
+                             {% if errors %}
+                                 {% for error in errors %}
+                                     <div class="form-group"><span style="color: red">{{ error }}</span></div>
+                                 {% endfor %}
+                            {% endif %}
+                             <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+                        </fieldset>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

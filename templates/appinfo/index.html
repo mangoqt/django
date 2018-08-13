@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load static %}
+    <link  href="{% static "css/index.css"%}" rel="stylesheet">
+    <script src="{% static "js/index.js" %}"></script>
+</head>
+<body>
+
+    <div class="form-group">
+     <form class="form-horizontal" name="register"  role="form" method="post" action="">
+     {% csrf_token %}
+         <label for="hostname" class="control-label">主机名称</label>
+         <input id="hostname" type="text" placeholder="模糊匹配" name="hostname" class="control-label "  style="width:150px; text-align: left">
+        <label for="ip" class="control-label">ip地址</label>
+        <input id="ip" type="text" placeholder="模糊匹配" name="ip" class="control-label "  style="width:150px; text-align: left">
+        <label for="subsystem" class="control-label">模块</label>
+        <input id="subsystem" type="text" placeholder="模糊匹配" name="subsystem" class="control-label "  style="width:150px; text-align: left">
+        <label for="appname" class="control-label">应用名称</label>
+        <input id="appname" type="text" placeholder="模糊匹配" name="appname" class="control-label "  style="width:150px; text-align: left">
+         <label for="envrio" class="control-label">部署环境</label>
+        <input id="envrio" type="text" placeholder="模糊匹配" name="envrio" class="control-label "  style="width:150px; text-align: left">
+        <div class="btn-group">
+              <button type="submit" class="btn btn-info" onclick="checkaction(2)"  class="btn" >查询</button>
+              <button type="submit" class="btn btn-info" onclick="checkaction(0)"  class="btn">删除</button>
+             <button type="submit" class="btn btn-info" onclick="checkaction(1)"  class="btn">修改</button>
+             <a  href="../add" class="btn"  id="add">新增</a>
+        </div>
+     </div>
+
+
+<div class="table-nav">
+    <table  class="table table-hover table-bordered" >
+    <tr>
+        <th>勾选</th>
+        <th>序号</th>
+        <th>主机名</th>
+        <th>ip</th>
+        <th>模块</th>
+        <th>应用名称</th>
+        <th>部署路径</th>
+        <th>端口</th>
+        <th>域名</th>
+        <th>部署环境</th>
+    </tr>
+    {% for device_info in device_list %}
+    <tr>
+        <td><input type="checkbox" class="checkbox" name="post_id" value="{{ device_info.id }}"  id="checkbox1"></td>
+        <td>{{device_info.id}}</td>
+        <td>{{device_info.hostname}}</td>
+        <td>{{device_info.ip}}</td>
+        <td>{{device_info.subsystem}}</td>
+        <td>{{device_info.appname}}</td>
+        <td>{{device_info.depapp}}</td>
+        <td>{{device_info.port}}</td>
+        <td>{{device_info.domain}}</td>
+        <td>{{device_info.envrio}}</td>
+    </tr>
+    {% endfor %}
+
+
+    </form>
+</table>
+    </div>
+   <br>
+      <p align="center">
+   <!--分页-->
+   {% for page_number in device_list.paginator.page_range %}
+        {% ifequal page_number  device_list.number %}
+          {{ page_number }}
+        {% else %}
+          <a href="?page={{ page_number }}">{{ page_number }}</a>
+        {% endifequal %}
+    {% endfor %}
+    [总记录:{{ count }}条]
+  <p>
+{% endblock %}
+</body>
+</html>

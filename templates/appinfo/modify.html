@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load staticfiles %}
+    <script src="{% static "js/modify.js" %}"></script>
+</head>
+<body>
+    <div class="panel panel-default">
+        <h3>资产信息修改</h3>
+        <form  name="register" action="" method="post" >
+        {% csrf_token %}
+        <table class="table" >
+        <tr>
+            <td><label for="id">序号</td>
+            <td ><input type="text" id="id" name="id"  value="{{chooseList.id}}"></td>
+            <td ><label for="hostname">主机名</td>
+            <td ><input type="text" name="hostname" value="{{chooseList.hostname}}"></td>
+            <td><label for="ip">ip</td>
+            <td><input type="text" name="ip" value="{{chooseList.ip}}"></td>
+            <td><label for="subsystem">模块</td>
+            <td><input type="text" name="subsystem" value="{{chooseList.subsystem}}"></td><br/>
+        </tr>
+        <tr>
+            <td><label for="appname">应用名称</td>
+            <td><input type="text" name="appname" value="{{chooseList.appname}}"></td>
+            <td><label for="depapp">部署路径</td>
+            <td><input type="text" name="depapp" value="{{chooseList.depapp}}"></td>
+            <td><label for="port">端口</td>
+            <td><input type="text" name="port" value="{{chooseList.port}}"></td>
+            <td><label for="domain">域名</td>
+            <td><input type="text" name="domain" value="{{chooseList.domain}}"></td>
+            <td><label for="envrio">部署环境</td>
+            <td><input type="text" name="envrio" value="{{chooseList.envrio}}"></td>
+        </tr>
+        </table>
+            <div class="btn-group">
+            <input type="hidden" name="ok" value="yes">
+            <button type="submit" class="btn btn-info" onclick="checkaction(0)"  onsubmit="" class="btn">保存</button>
+            <button type="submit" class="btn btn-info" onclick="checkaction(1)"  class="btn">返回</button>
+             </div>
+        </form>
+    </div>
+{% endblock %}
